@@ -1,0 +1,53 @@
+{
+	"$schema": "http://xcdl.github.io/schemas/xpack-1-1.json",
+	"name": "ilg-cortexm-startup",
+	"title": "Cortex-M Startup",
+	"description": "An xPack with Cortex-M startup code.",
+	"xcdlFile": ".xcdl.json",
+	"repository": 
+	{
+		"type": "git",
+		"url": "https://github.com/micro-os-plus/cortexm-startup.git",
+		"archive": "https://github.com/micro-os-plus/cortexm-startup/archive/xpack.zip"
+	},
+
+	"version": "0.1.1",
+	"releases": [
+		
+	],
+
+	"keywords": [
+		"arm",
+		"cortex-m",
+		"startup"
+	],
+
+	"homepage": "https://github.com/micro-os-plus/cortexm-startup",
+	"support": [
+		{
+			"description": "all issues",
+			"url": "https://github.com/micro-os-plus/cortexm-startup/issues"
+		}
+	],
+
+	"license": "LGPL-3.0",
+	"maintainers": [
+		{
+			"name": "Liviu Ionescu",
+			"email": "ilg@livius.net",
+			"url": "http://liviusdotnet.worldpress.com"
+		}
+	],
+
+	"contributors": [
+		{
+			"name": "Liviu Ionescu",
+			"email": "ilg@livius.net",
+			"url": "http://liviusdotnet.worldpress.com"
+		}
+	],
+
+	"dependencies": [
+		
+	]
+}

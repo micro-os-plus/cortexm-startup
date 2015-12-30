@@ -1,0 +1,23 @@
+{
+	"name": "ilg-cortexm-startup",
+	"description": "An xPack with Cortex-M startup code.",
+	"version": "0.1.1",
+	"keywords": [
+		"arm",
+		"cortex-m",
+		"startup",
+		"xpack",
+		"xcdl"
+	],
+	"author": "Liviu Ionescu <ilg@livius.net>",
+	"homepage": "https://github.com/micro-os-plus/cortexm-startup",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/micro-os-plus/cortexm-startup.git"
+	},
+	"bugs": {
+		"url": "https://github.com/micro-os-plus/cortexm-startup/issues"
+	},
+	"license": "LGPL-3.0",
+	"dependencies": {}
+}
