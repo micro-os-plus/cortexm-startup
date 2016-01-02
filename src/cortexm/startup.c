@@ -80,6 +80,9 @@ extern unsigned int __bss_regions_array_end;
 extern void
 __initialize_args (int*, char***);
 
+extern void
+initialise_monitor_handles (void);
+
 // main() is the entry point for newlib based applications.
 // By default, there are no arguments, but this can be customised
 // by redefining __initialize_args(), which is done when the
@@ -269,7 +272,7 @@ _start (void)
       || (__data_end_guard != DATA_END_GUARD_VALUE))
     {
       for (;;)
-      ;
+        ;
     }
 #endif
 
@@ -297,7 +300,7 @@ _start (void)
   if ((__bss_begin_guard != 0) || (__bss_end_guard != 0))
     {
       for (;;)
-      ;
+        ;
     }
 #endif
 
@@ -327,5 +330,52 @@ _start (void)
   for (;;)
     ;
 }
+
+// ----------------------------------------------------------------------------
+
+#if !defined(OS_USE_SEMIHOSTING)
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+
+// This is the standard default implementation for the routine to
+// process args. It returns a single empty arg.
+//
+// For semihosting applications, this is redefined to get the real
+// args from the debugger.
+//
+// You can redefine it to fetch some args from a non-volatile memory.
+
+void __attribute__((weak))
+__initialize_args (int* p_argc, char*** p_argv)
+{
+  // By the time we reach this, the data and bss should have been initialised.
+
+  // The strings pointed to by the argv array shall be modifiable by the
+  // program, and retain their last-stored values between program startup
+  // and program termination. (static, no const)
+  static char name[] = "";
+
+  // The string pointed to by argv[0] represents the program name;
+  // argv[0][0] shall be the null character if the program name is not
+  // available from the host environment. argv[argc] shall be a null pointer.
+  // (static, no const)
+  static char* argv[2] =
+    { name, NULL };
+
+  *p_argc = 1;
+  *p_argv = &argv[0];
+
+#if __STDC_HOSTED__ != 0
+  // temporary here
+  initialise_monitor_handles ();
+#endif
+
+  return;
+}
+
+#pragma GCC diagnostic pop
+
+#endif /* !defined(OS_USE_SEMIHOSTING) */
 
 // ----------------------------------------------------------------------------
