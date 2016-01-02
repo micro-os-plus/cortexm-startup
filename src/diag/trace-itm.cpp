@@ -20,6 +20,7 @@
 #if defined(OS_USE_TRACE_ITM)
 
 #include "diag/trace.h"
+#include "cmsis_device.h"
 
 // ----------------------------------------------------------------------------
 
@@ -30,15 +31,13 @@ namespace os
     // ------------------------------------------------------------------------
 
     void
-    trace_initialize (void)
+    initialize (void)
     {
       // For ITM no inits required.
       // The debug registers are set the JTAG software.
     }
 
-    // ----------------------------------------------------------------------------
-
-#include "cmsis_device.h"
+    // ------------------------------------------------------------------------
 
 #if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
 
@@ -56,8 +55,10 @@ namespace os
 #endif
 
     ssize_t
-    trace_write (const char* buf, size_t nbyte)
+    write (const void* buf, std::size_t nbyte)
     {
+      const char* cbuf = (const char*) buf;
+
       for (size_t i = 0; i < nbyte; i++)
         {
           // Check if ITM or the stimulus port are not enabled.
@@ -72,7 +73,8 @@ namespace os
           while (ITM->PORT[OS_INTEGER_TRACE_ITM_STIMULUS_PORT].u32 == 0)
             ;
           // then send data, one byte at a time
-          ITM->PORT[OS_INTEGER_TRACE_ITM_STIMULUS_PORT].u8 = (uint8_t) (*buf++);
+          ITM->PORT[OS_INTEGER_TRACE_ITM_STIMULUS_PORT].u8 =
+              (uint8_t) (*cbuf++);
         }
 
       // All characters successfully sent.
