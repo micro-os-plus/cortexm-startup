@@ -80,9 +80,6 @@ extern unsigned int __bss_regions_array_end;
 extern void
 __initialize_args (int*, char***);
 
-extern void
-initialise_monitor_handles (void);
-
 // main() is the entry point for newlib based applications.
 // By default, there are no arguments, but this can be customised
 // by redefining __initialize_args(), which is done when the
@@ -334,6 +331,11 @@ _start (void)
 // ----------------------------------------------------------------------------
 
 #if !defined(OS_USE_SEMIHOSTING)
+
+#if __STDC_HOSTED__ != 0
+extern void
+initialise_monitor_handles (void);
+#endif
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
