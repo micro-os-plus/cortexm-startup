@@ -19,7 +19,7 @@
 #if defined(TRACE)
 #if defined(OS_USE_TRACE_ITM)
 
-#include "diag/trace.h"
+#include <cmsis-plus/diag/trace.h>
 #include "cmsis_device.h"
 
 // ----------------------------------------------------------------------------
