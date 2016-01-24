@@ -20,7 +20,7 @@
 #include <cmsis-plus/arm/semihosting.h>
 #include <cmsis-plus/diag/trace.h>
 #include <string.h>
-#include "cortexm/exception-handlers.h"
+#include <cmsis-plus/cortexm/exception-handlers.h>
 
 // ----------------------------------------------------------------------------
 
